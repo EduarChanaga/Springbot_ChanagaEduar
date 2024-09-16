@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gestión de Tareas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            max-width: 600px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        li:last-child {
+            border-bottom: none;
+        }
+    </style>
+    <script>
+        function cargarTareas() {
+            fetch('/api/tareas')
+                .then(response => response.json())
+                .then(data => {
+                    const listaTareas = document.getElementById('lista-tareas');
+                    listaTareas.innerHTML = '';
+                    data.forEach(tarea => {
+                        const itemTarea = document.createElement('li');
+                        itemTarea.innerText = `${tarea.descripcion} (Completada: ${tarea.completada})`;
+                        listaTareas.appendChild(itemTarea);
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function agregarTarea() {
+            const descripcion = document.getElementById('descripcion-tarea').value;
+            fetch('/api/tareas', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ descripcion: descripcion, completada: false })
+            })
+                .then(response => response.json())
+                .then(() => {
+                    cargarTareas();
+                    document.getElementById('descripcion-tarea').value = '';
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        window.onload = function() {
+            cargarTareas();
+        };
+    </script>
+</head>
+<body>
+<h1>Gestión de Tareas</h1>
+<div class="container">
+    <input type="text" id="descripcion-tarea" placeholder="Descripción de la nueva tarea">
+    <button onclick="agregarTarea()">Agregar Tarea</button>
+    <ul id="lista-tareas"></ul>
+</div>
+</body>
+</html>
