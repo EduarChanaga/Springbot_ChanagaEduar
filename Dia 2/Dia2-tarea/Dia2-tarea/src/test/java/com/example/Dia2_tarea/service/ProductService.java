@@ -1,5 +1,5 @@
 // ProductService.java
-package com.example.Dia2_tarea;
+package com.example.Dia2_tarea.service;
 
 import com.example.Dia2_tarea.Product;
 import com.example.Dia2_tarea.ProductRepository;

@@ -1,5 +1,5 @@
 // ProductRepository.java
-package com.example.Dia2_tarea;
+package com.example.Dia2_tarea.repository;
 
 import com.example.Dia2_tarea.Product;
 import org.springframework.stereotype.Repository;
