@@ -1,7 +1,6 @@
+// ProductCLI.java
 package com.example.Dia2_tarea;
 
-import com.example.productmanagement.model.Product;
-import com.example.productmanagement.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -65,16 +64,20 @@ public class ProductCLI {
     }
 
     private void addNewProduct() {
-        System.out.print("Nombre del producto: ");
-        String name = scanner.nextLine();
-        System.out.print("Precio del producto: ");
-        double price = scanner.nextDouble();
-        System.out.print("Cantidad: ");
-        int quantity = scanner.nextInt();
+        try {
+            System.out.print("Nombre del producto: ");
+            String name = scanner.nextLine();
+            System.out.print("Precio del producto: ");
+            double price = scanner.nextDouble();
+            System.out.print("Cantidad: ");
+            int quantity = scanner.nextInt();
 
-        Product newProduct = new Product(null, name, price, quantity);
-        productService.addProduct(newProduct);
-        System.out.println("Producto añadido exitosamente.");
+            Product newProduct = new Product(null, name, price, quantity);
+            productService.addProduct(newProduct);
+            System.out.println("Producto añadido exitosamente.");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error al añadir el producto: " + e.getMessage());
+        }
     }
 
     private void deleteProduct() {

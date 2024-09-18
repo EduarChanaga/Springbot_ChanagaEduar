@@ -1,7 +1,6 @@
+// ProductService.java
 package com.example.Dia2_tarea;
 
-import com.example.productmanagement.model.Product;
-import com.example.productmanagement.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

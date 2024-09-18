@@ -1,6 +1,6 @@
+// ProductRepository.java
 package com.example.Dia2_tarea;
 
-import com.example.productmanagement.model.Product;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
